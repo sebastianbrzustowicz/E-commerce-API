@@ -20,6 +20,8 @@ chmod +x run_docker_commands.sh
 
 ## Docker
 
+Follow these commands if u want to make containers manually and adjust them to your prorities.
+
 ### Database
 
 The Dockerfile will provide containerisation and initialisation of the MySQL database.  
@@ -38,7 +40,7 @@ Now the MySQL container should run properly.
 
 ### Server
 
-Main Dockerfile will provide containerisation and initialisation of the Java application database.  
+This Dockerfile will provide containerisation and initialisation of the Java application.  
 There is a set of commands to get to the same point when starting the application.  
 Firstly make sure you are in project directory.   
 Now u can execute building process:   
@@ -134,13 +136,12 @@ The JDBC interface has been used to create a connection to the database.
 
 | Column Name        | Data Type                 | Constraints                        |
 |--------------------|---------------------------|------------------------------------|
-| userID             | VARCHAR(36) NULL          |                                    |
+| userID             | VARCHAR(36) NULL          | FOREIGN KEY (userId) REFERENCES shopAPI.users(userID) |
 | orderID            | VARCHAR(36) PRIMARY KEY   |                                    |
 | orderType          | VARCHAR(50) NOT NULL      |                                    |
 | orderProducts      | VARCHAR(255) NOT NULL     |                                    |
 | additionalInfo     | VARCHAR(255)              |                                    |
 | registrationTime   | DATETIME NULL             |                                    |
-|                    |                           | FOREIGN KEY (userId) REFERENCES shopAPI.users(userID) |
 
 
 ### Table: shopAPI.orderedProducts
