@@ -19,6 +19,22 @@ docker run --name shopAPIContainer -e MYSQL_ROOT_PASSWORD=sebastian -d -p 3307:3
 ```
 Now the MySQL container should run properly.
 
+## Docker Java
+
+Main Dockerfile will provide containerisation and initialisation of the Java application database.  
+There is a set of commands to get to the same point when starting the application.  
+Firstly make sure you are in project directory.   
+Now u can execute building process:   
+```
+docker build -t javashopapi:latest .
+```
+I chose port 8081 for Java container, it is up to you.    
+You can then run the container:
+```
+docker run -d -p 8081:8081 javashopapi:latest
+```
+Now the Java container should run properly.
+
 ## Initialize app
 
 Once u are in main project directory this time.   
