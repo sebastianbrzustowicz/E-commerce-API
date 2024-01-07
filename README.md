@@ -10,12 +10,12 @@ There is a set of commands to get to the same point when starting the applicatio
 Firstly make sure you are in `Docker` directory.   
 Now u can execute building process:   
 ```
-docker build -t mysql:latest .
+docker build -t mysqlshopapi:latest .
 ```
 I chose port 3307 because the standard 3306 port for MySQL is occupied by other container. It is up to you.    
 You can then run the container with the default password or you can change it (don't forget to change it in the project properties too):
 ```
-docker run --name shopAPIMySQLContainer -e MYSQL_ROOT_PASSWORD=sebastian -d -p 3307:3306 mysql:latest
+docker run --name shopAPIDatabaseContainer -e MYSQL_ROOT_PASSWORD=sebastian -d -p 3307:3306 mysqlshopapi:latest
 ```
 Now the MySQL container should run properly.
 
@@ -31,7 +31,7 @@ docker build -t javashopapi:latest .
 I chose port 8081 for Java container, it is up to you.    
 You can then run the container:
 ```
- docker run --name shopAPIJavaContainer -d -p 8081:8081 javashopapi:latest
+ docker run --name shopAPIServerContainer -d -p 8081:8081 javashopapi:latest
 ```
 Now the Java container should run properly.
 
