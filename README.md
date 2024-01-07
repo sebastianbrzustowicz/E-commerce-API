@@ -3,47 +3,64 @@
 Shop API is a Java-based, server-side application created to establish communication with client and database.   
 The application uses a MySQL database to store users and orders information.  
 
-## Docker MySQL
+## Deploy
+
+All in one deploy copy-paste commands for windows and linux systems.
+
+Windows:
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\run_docker_commands.ps1
+```
+Linux:
+```console
+chmod +x run_docker_commands.sh
+./run_docker_commands.sh
+```
+
+## Docker
+
+### Database
 
 The Dockerfile will provide containerisation and initialisation of the MySQL database.  
 There is a set of commands to get to the same point when starting the application.  
-Firstly make sure you are in `Docker` directory.   
+Firstly make sure you are in main project directory.   
 Now u can execute building process:   
-```
-docker build -t mysqlshopapi:latest .
+```console
+docker build -t mysqlshopapi:latest -f Docker_Database/Dockerfile .
 ```
 I chose port 3307 because the standard 3306 port for MySQL is occupied by other container. It is up to you.    
 You can then run the container with the default password or you can change it (don't forget to change it in the project properties too):
-```
+```console
 docker run --name shopAPIDatabaseContainer -e MYSQL_ROOT_PASSWORD=sebastian -d -p 3307:3306 mysqlshopapi:latest
 ```
 Now the MySQL container should run properly.
 
-## Docker Java
+### Server
 
 Main Dockerfile will provide containerisation and initialisation of the Java application database.  
 There is a set of commands to get to the same point when starting the application.  
 Firstly make sure you are in project directory.   
 Now u can execute building process:   
-```
-docker build -t javashopapi:latest .
+```console
+docker build -t javashopapi:latest -f Docker_Server/Dockerfile .
 ```
 I chose port 8081 for Java container, it is up to you.    
 You can then run the container:
-```
- docker run --name shopAPIServerContainer -d -p 8081:8081 javashopapi:latest
+```console
+docker run --name shopAPIServerContainer -d -p 8081:8081 javashopapi:latest
 ```
 Now the Java container should run properly.
 
-## Initialize app
+## Initialize development stage
 
 Once u are in main project directory this time.   
 Firstly install all dependencies:
-```
+```console
 mvn clean install
 ```
 Then run application:
-```
+```console
 mvn spring-boot:run
 ```
 Now everything should be set up.
