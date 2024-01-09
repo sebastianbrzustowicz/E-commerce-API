@@ -95,13 +95,13 @@ Rest endpoints for admin only:
 
 | HTTP method | endpoint | description | request type | response type |
 | -------------- | -------------- | -------------- | -------------- | -------------- |
-| :yellow_circle: POST | /admin/products/add | Add a new product to the catalog | Product | int |
-| :red_circle: DELETE | /admin/products/delete/{productId} | Delete a product from the catalog | - | int |
-| :purple_circle: PATCH | /admin/products/update/{productId} | Update product details | Product | int |
-| :yellow_circle: POST | /admin/orders/fulfill/{orderId} | Mark an order as fulfilled | - | int |
-| :yellow_circle: POST | /admin/users/update/{userId} | Update user information | User | int |
-| :green_circle: GET | /admin/reports/sales | Retrieve sales report | DateRange | SalesReport |
-| :green_circle: GET | /admin/reports/inventory | Retrieve inventory report | - | InventoryReport |
+| :yellow_circle: POST | /admin/products/add | Add a new product to the catalog | Product | String |
+| :red_circle: DELETE | /admin/products/delete/{productId} | Delete a product from the catalog | - | String |
+| :purple_circle: PATCH | /admin/products/update/{productId} | Update product details | Product | String |
+| :yellow_circle: POST | /admin/orders/fulfill/{orderId} | Mark an order as fulfilled | - | String |
+| :yellow_circle: POST | /admin/users/update/{userId} | Update user information | User | String |
+| :green_circle: GET | /admin/reports/sales | Retrieve sales report | - | List<Product> |
+| :green_circle: GET | /admin/reports/inventory | Retrieve inventory report | - | List<Product> |
 
 ## Database
 
