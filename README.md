@@ -100,8 +100,8 @@ Rest endpoints for admin only:
 | :purple_circle: PATCH | /admin/products/update/{productId} | Update product details | Product | String |
 | :yellow_circle: POST | /admin/orders/fulfill/{orderId} | Mark an order as fulfilled | - | String |
 | :yellow_circle: POST | /admin/users/update/{userId} | Update user information | User | String |
-| :green_circle: GET | /admin/reports/sales | Retrieve sales report | - | List<Product> |
-| :green_circle: GET | /admin/reports/inventory | Retrieve inventory report | - | List<Product> |
+| :green_circle: GET | /admin/reports/sales | Retrieve sales report | - | List&lt;Product&gt; |
+| :green_circle: GET | /admin/reports/inventory | Retrieve inventory report | - | List&lt;Product&gt; |
 
 ## Database
 
