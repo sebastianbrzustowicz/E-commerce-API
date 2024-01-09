@@ -77,17 +77,19 @@ Rest endpoints for client only:
 | -------------- | -------------- | -------------- | -------------- | -------------- |
 | :green_circle: GET | /products | Retrieve a list of products | - | List&lt;Product&gt; |
 | :green_circle: GET | /products/{id} | Get details for a specific product | - | Product |
-| :green_circle: GET | /cart | View the current contents of the shopping cart | - | Cart |
-| :yellow_circle: POST | /cart/add | Add a product to the shopping cart | Product | Cart |
+| :green_circle: GET | /cart?userID={userID} | View the current contents of the shopping cart | - | Cart |
+| :yellow_circle: POST | /cart/add | Add a product to the shopping cart | Cart | String |
 | :yellow_circle: POST | /login | Authenticate a user | Credentials | String |
-| :yellow_circle: POST | /register | Register a new user | User | int |
-| :green_circle: GET | /orders | View a list of past orders | - | List&lt;Order&gt; |
-| :green_circle: GET | /orders/{id} | Retrieve details of a specific order | - | Order |
-| :green_circle: GET | /search | Search for products based on user input | SearchQuery | List&lt;Product&gt; |
+| :yellow_circle: POST | /register | Register a new user | User | String |
+| :green_circle: GET | /orders/past?userID={userID} | View a list of past orders | - | List&lt;Order&gt; |
+| :yellow_circle: POST | /orders/add | Add all user's cart products to the shopping orders | OrderRequest | Order |
+| :green_circle: GET | /orders/details?orderID={orderID} | Retrieve details of a specific order | - | List&lt;OrderedProduct&gt; |
+| :green_circle: GET | /search?searchQuery={searchQuery} | Search for products based on user input | - | List&lt;Product&gt; |
 | :green_circle: GET | /categories | Retrieve a list of product categories | - | List&lt;Category&gt; |
-| :yellow_circle: POST | /profile | View or update user profile information | User | UserProfile |
-| :green_circle: GET | /products/{id}/reviews | Get product reviews | - | List&lt;Review&gt; |
-| :yellow_circle: POST | /products/{id}/reviews/add | Add a review for a product | Review | int |
+| :green_circle: GET | /profile/info?userID={userID} | View user profile information | - | User |
+| :yellow_circle: POST | /profile/update | Update user profile information | User | String |
+| :green_circle: GET | /products/{reviewID}/reviews | Get product reviews | - | List&lt;Review&gt; |
+| :yellow_circle: POST | /products/{reviewID}/reviews/add | Add a review for a product | Review | String |
 
 Rest endpoints for admin only:    
 
@@ -154,6 +156,15 @@ The JDBC interface has been used to create a connection to the database.
 | price              | DECIMAL(10, 2) NOT NULL   |                                    |
 | amount             | INT NOT NULL              |                                    |
 | additionalInfo     | TEXT                      |                                    |
+
+### Table: shopAPI.cart
+
+| Column Name        | Data Type                 | Constraints                        |
+|--------------------|---------------------------|------------------------------------|
+| cartID             | VARCHAR(36) PRIMARY KEY   |                                    |
+| userID             | VARCHAR(36)               | FOREIGN KEY (userID) REFERENCES shopAPI.users(userID) |
+| productID          | DECIMAL(10, 2) NOT NULL   | FOREIGN KEY (productID) REFERENCES shopAPI.products(productID) |
+| quantity           | INT NOT NULL              |                                    |
 
 ## Tests
 
