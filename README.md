@@ -80,7 +80,7 @@ Rest endpoints for client only:
 | :green_circle: GET | /cart | View the current contents of the shopping cart | - | Cart |
 | :yellow_circle: POST | /cart/add | Add a product to the shopping cart | Product | Cart |
 | :yellow_circle: POST | /login | Authenticate a user | Credentials | String |
-| :yellow_circle: POST | /register | Register a new user | User | int |
+| :yellow_circle: POST | /register | Register a new user | User | String |
 | :green_circle: GET | /orders | View a list of past orders | - | List&lt;Order&gt; |
 | :green_circle: GET | /orders/{id} | Retrieve details of a specific order | - | Order |
 | :green_circle: GET | /search | Search for products based on user input | SearchQuery | List&lt;Product&gt; |
