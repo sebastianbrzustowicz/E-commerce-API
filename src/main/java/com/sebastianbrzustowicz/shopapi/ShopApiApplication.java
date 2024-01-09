@@ -1,4 +1,4 @@
-package com.sebastianbrzustowicz.shopapi.application;
+package com.sebastianbrzustowicz.shopapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

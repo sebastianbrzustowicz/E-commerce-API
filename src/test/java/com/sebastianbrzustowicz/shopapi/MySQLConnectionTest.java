@@ -1,5 +1,7 @@
 package com.sebastianbrzustowicz.shopapi;
 
+import org.springframework.boot.test.context.SpringBootTest;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 

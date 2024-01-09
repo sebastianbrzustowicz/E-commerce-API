@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("")
 public class ShopController {
 
     private final ShopRepository shopRepository;
@@ -21,7 +21,7 @@ public class ShopController {
         String email = "email";
         String password = "password";
         //return ShopRepository.test(email, password);
-        return "it works";
+        return "api endpoint works";
     }
 
     @GetMapping("/products")

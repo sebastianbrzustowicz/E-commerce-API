@@ -22,7 +22,7 @@ public class AdminController {
         String email = "email";
         String password = "password";
         //return ShopRepository.test(email, password);
-        return "it works";
+        return "admin endpoint works";
     }
 
     @PostMapping("/products/add")
