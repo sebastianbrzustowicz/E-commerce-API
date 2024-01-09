@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS  shopAPI.users (
 -- === products table ===
 CREATE TABLE IF NOT EXISTS shopAPI.products (
     productID VARCHAR(36) PRIMARY KEY,
-    productName VARCHAR(255) NOT NULL,
+    productName VARCHAR(255) NOT NULL UNIQUE,
     price DECIMAL(10, 2) NOT NULL,
     description VARCHAR(500) NOT NULL,
     category VARCHAR(50) NOT NULL,
