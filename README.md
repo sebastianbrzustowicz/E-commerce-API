@@ -115,7 +115,7 @@ The JDBC interface has been used to create a connection to the database.
 |---------------|-----------------------|-----------------|
 | userID        | VARCHAR(36)           | PRIMARY KEY     |
 | name          | VARCHAR(255) NOT NULL |                 |
-| email         | VARCHAR(255) NOT NULL |                 |
+| email         | VARCHAR(255) NOT NULL UNIQUE |          |
 | password      | VARCHAR(255) NOT NULL |                 |
 | phoneNum      | INT NOT NULL          |                 |
 | role          | VARCHAR(50) NOT NULL  |                 |
@@ -123,48 +123,56 @@ The JDBC interface has been used to create a connection to the database.
 
 ### Table: shopAPI.products
 
-| Column Name        | Data Type                 | Constraints            |
-|--------------------|---------------------------|------------------------|
-| productID          | VARCHAR(36)               | PRIMARY KEY            |
-| productName        | VARCHAR(255) NOT NULL     |                        |
-| price              | DECIMAL(10, 2) NOT NULL   |                        |
-| description        | TEXT                      |                        |
-| category           | VARCHAR(50)               |                        |
-| availableQuantity  | INT NOT NULL              |                        |
-| imagePath          | VARCHAR(255)              |                        |
+| Column Name      | Data Type                | Constraints        |
+|------------------|--------------------------|--------------------|
+| productID        | VARCHAR(36)              | PRIMARY KEY        |
+| productName      | VARCHAR(255) NOT NULL    |                    |
+| price            | DECIMAL(10, 2) NOT NULL  |                    |
+| description      | VARCHAR(500) NOT NULL    |                    |
+| category         | VARCHAR(50) NOT NULL     |                    |
+| availableQuantity| INT NOT NULL             |                    |
+| imagePath        | VARCHAR(255)             |                    |
 
 
 ### Table: shopAPI.orders
 
-| Column Name        | Data Type                 | Constraints                        |
-|--------------------|---------------------------|------------------------------------|
-| userID             | VARCHAR(36) NULL          | FOREIGN KEY (userId) REFERENCES shopAPI.users(userID) |
-| orderID            | VARCHAR(36) PRIMARY KEY   |                                    |
-| orderType          | VARCHAR(50) NOT NULL      |                                    |
-| orderProducts      | VARCHAR(255) NOT NULL     |                                    |
-| additionalInfo     | VARCHAR(255)              |                                    |
-| registrationTime   | DATETIME NULL             |                                    |
-
+| Column Name        | Data Type                | Constraints                  |
+|--------------------|--------------------------|------------------------------|
+| userID             | VARCHAR(36)              | FOREIGN KEY (userId)| REFERENCES shopAPI.users(userID) |
+| orderID            | VARCHAR(36) PRIMARY KEY  |                              |
+| orderType          | VARCHAR(50) NOT NULL     |                              |
+| additionalInfo     | VARCHAR(255)             |                              |
+| registrationTime   | DATETIME                 |                              |
 
 ### Table: shopAPI.orderedProducts
 
-| Column Name        | Data Type                 | Constraints                        |
-|--------------------|---------------------------|------------------------------------|
-| orderedProductID   | VARCHAR(36) PRIMARY KEY   |                                    |
-| orderID            | VARCHAR(36)               | FOREIGN KEY (orderID) REFERENCES shopAPI.orders(orderID) |
-| productName        | VARCHAR(255) NOT NULL     |                                    |
-| price              | DECIMAL(10, 2) NOT NULL   |                                    |
-| amount             | INT NOT NULL              |                                    |
-| additionalInfo     | TEXT                      |                                    |
+| Column Name   | Data Type                | Constraints                             |
+|---------------|--------------------------|-----------------------------------------|
+| orderID       | VARCHAR(36)              | FOREIGN KEY (orderID) REFERENCES shopAPI.orders(orderID) |
+| productID     | VARCHAR(36)              | FOREIGN KEY (productID) REFERENCES shopAPI.products(productID) |
+| productName   | VARCHAR(255) NOT NULL    |                                         |
+| price         | DECIMAL(10, 2) NOT NULL  |                                         |
+| quantity      | INT NOT NULL             |                                         |
 
 ### Table: shopAPI.cart
 
-| Column Name        | Data Type                 | Constraints                        |
-|--------------------|---------------------------|------------------------------------|
-| cartID             | VARCHAR(36) PRIMARY KEY   |                                    |
-| userID             | VARCHAR(36)               | FOREIGN KEY (userID) REFERENCES shopAPI.users(userID) |
-| productID          | DECIMAL(10, 2) NOT NULL   | FOREIGN KEY (productID) REFERENCES shopAPI.products(productID) |
-| quantity           | INT NOT NULL              |                                    |
+| Column Name   | Data Type                | Constraints                                  |
+|---------------|--------------------------|----------------------------------------------|
+| cartID        | VARCHAR(36) PRIMARY KEY  |                                              |
+| userID        | VARCHAR(36)              | FOREIGN KEY (userID) REFERENCES shopAPI.users(userID) |
+| productID     | VARCHAR(36)              | FOREIGN KEY (productID) REFERENCES shopAPI.products(productID) |
+| quantity      | INT                      |                                              |
+
+### Table: shopAPI.reviews
+
+| Column Name   | Data Type                | Constraints                                  |
+|---------------|--------------------------|----------------------------------------------|
+| reviewID      | VARCHAR(36) PRIMARY KEY  |                                              |
+| productID     | VARCHAR(36)              | FOREIGN KEY (productID) REFERENCES shopAPI.products(productID) |
+| userID        | VARCHAR(36)              | FOREIGN KEY (userID) REFERENCES shopAPI.users(userID) |
+| comment       | VARCHAR(500) NOT NULL    |                                              |
+| rating        | INT NOT NULL             |                                              |
+| reviewTime    | DATETIME NOT NULL         |                                              |
 
 ## Tests
 
