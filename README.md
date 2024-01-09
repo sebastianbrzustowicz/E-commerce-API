@@ -77,7 +77,7 @@ Rest endpoints for client only:
 | -------------- | -------------- | -------------- | -------------- | -------------- |
 | :green_circle: GET | /products | Retrieve a list of products | - | List&lt;Product&gt; |
 | :green_circle: GET | /products/{id} | Get details for a specific product | - | Product |
-| :green_circle: GET | /cart | View the current contents of the shopping cart | - | Cart |
+| :green_circle: GET | /cart | View the current contents of the shopping cart | userID | Cart |
 | :yellow_circle: POST | /cart/add | Add a product to the shopping cart | Product | Cart |
 | :yellow_circle: POST | /login | Authenticate a user | Credentials | String |
 | :yellow_circle: POST | /register | Register a new user | User | String |
@@ -154,6 +154,15 @@ The JDBC interface has been used to create a connection to the database.
 | price              | DECIMAL(10, 2) NOT NULL   |                                    |
 | amount             | INT NOT NULL              |                                    |
 | additionalInfo     | TEXT                      |                                    |
+
+### Table: shopAPI.cart
+
+| Column Name        | Data Type                 | Constraints                        |
+|--------------------|---------------------------|------------------------------------|
+| cartID             | VARCHAR(36) PRIMARY KEY   |                                    |
+| userID             | VARCHAR(36)               | FOREIGN KEY (userID) REFERENCES shopAPI.users(userID) |
+| productID          | DECIMAL(10, 2) NOT NULL   | FOREIGN KEY (productID) REFERENCES shopAPI.products(productID) |
+| quantity           | INT NOT NULL              |                                    |
 
 ## Tests
 
