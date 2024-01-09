@@ -4,43 +4,60 @@ USE shopAPI;
 CREATE TABLE IF NOT EXISTS  shopAPI.users (
 	userID VARCHAR(36) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     phoneNum INT NOT NULL,
     role VARCHAR(50) NOT NULL,
     accCreated DATETIME NOT NULL
 );
-
 -- === products table ===
 CREATE TABLE IF NOT EXISTS shopAPI.products (
     productID VARCHAR(36) PRIMARY KEY,
     productName VARCHAR(255) NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
-    description TEXT,
-    category VARCHAR(50),
+    description VARCHAR(500) NOT NULL,
+    category VARCHAR(50) NOT NULL,
     availableQuantity INT NOT NULL,
     imagePath VARCHAR(255)
 );
-
 -- === orders table ===
 CREATE TABLE IF NOT EXISTS shopAPI.orders (
     userID VARCHAR(36) NULL,
     orderID VARCHAR(36) PRIMARY KEY,
     orderType VARCHAR(50) NOT NULL,
-    orderProducts VARCHAR(255) NOT NULL,
     additionalInfo VARCHAR(255),
     registrationTime DATETIME NULL,
     FOREIGN KEY (userId) REFERENCES shopAPI.users(userID)
 );
 -- === orderedProducts table ===
 CREATE TABLE IF NOT EXISTS shopAPI.orderedProducts (
-    orderedProductID VARCHAR(36) PRIMARY KEY,
-    orderID VARCHAR(36),
+	orderID VARCHAR(36),
+    productID VARCHAR(36),
     productName VARCHAR(255) NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
-    amount INT NOT NULL,
-    additionalInfo TEXT,
-    FOREIGN KEY (orderID) REFERENCES shopAPI.orders(orderID)
+    quantity INT NOT NULL,
+    FOREIGN KEY (orderID) REFERENCES shopAPI.orders(orderID),
+    FOREIGN KEY (productID) REFERENCES shopAPI.products(productID)
+);
+-- === cart table ===
+CREATE TABLE shopAPI.cart (
+    cartID VARCHAR(36) PRIMARY KEY,
+    userID VARCHAR(36),
+    productID VARCHAR(36),
+    quantity INT,
+    FOREIGN KEY (userID) REFERENCES shopAPI.users(userID),
+    FOREIGN KEY (productID) REFERENCES shopAPI.products(productID)
+);
+-- === reviews table ===
+CREATE TABLE IF NOT EXISTS shopAPI.reviews (
+    reviewID VARCHAR(36) PRIMARY KEY,
+    productID VARCHAR(36),
+    userID VARCHAR(36),
+    comment VARCHAR(500) NOT NULL,
+    rating INT NOT NULL,
+    reviewTime DATETIME NOT NULL,
+    FOREIGN KEY (productID) REFERENCES shopAPI.products(productID),
+    FOREIGN KEY (userID) REFERENCES shopAPI.users(userID)
 );
 
 -- show tables
@@ -48,17 +65,22 @@ SELECT * FROM shopAPI.users;
 SELECT * FROM shopAPI.products;
 SELECT * FROM shopAPI.orders;
 SELECT * FROM shopAPI.orderedProducts;
-
+SELECT * FROM shopAPI.cart;
+SELECT * FROM shopAPI.reviews;
 -- clear tables
-TRUNCATE shopAPI.users;
-TRUNCATE shopAPI.products;
-TRUNCATE shopAPI.orders;
+TRUNCATE shopAPI.reviews;
+TRUNCATE shopAPI.cart;
 TRUNCATE shopAPI.orderedProducts;
+TRUNCATE shopAPI.orders;
+TRUNCATE shopAPI.products;
+TRUNCATE shopAPI.users;
 -- drop tables
-DROP TABLE shopAPI.users;
-DROP TABLE shopAPI.products;
-DROP TABLE shopAPI.orders;
+DROP TABLE shopAPI.reviews;
+DROP TABLE shopAPI.cart;
 DROP TABLE shopAPI.orderedProducts;
+DROP TABLE shopAPI.orders;
+DROP TABLE shopAPI.products;
+DROP TABLE shopAPI.users;
 
 -- example inserts
 INSERT INTO shopAPI.users (userID, name, email, password, phoneNum, role, accCreated)
@@ -72,13 +94,27 @@ VALUES
 ('prod2', 'T-shirt Blue', 19.99, 'Comfortable cotton t-shirt in blue color.', 'Apparel', 50, '/images/tshirt_blue.jpg'),
 ('prod3', 'Book: Bestseller', 29.99, 'A bestselling book with intriguing content.', 'Books', 30, '/images/bestseller_book.jpg');
 
-INSERT INTO shopAPI.orders (userID, orderID, orderType, orderProducts, additionalInfo, registrationTime)
+INSERT INTO shopAPI.orders (userID, orderID, orderType, additionalInfo, registrationTime)
 VALUES
-('1', 'order123', 'Online', 'Product1, Product2', 'Express Shipping', '2024-01-07 15:45:00'),
-('2', 'order456', 'In-Store', 'Product3, Product4, Product5', 'Gift wrapping included', '2024-01-08 09:30:00');
+('1', 'order123', 'Online', 'Express Shipping', '2024-01-07 15:45:00'),
+('2', 'order456', 'In-Store', 'Gift wrapping included', '2024-01-08 09:30:00');
 
-INSERT INTO shopAPI.orderedProducts (orderedProductID, orderID, productName, price, amount, additionalInfo)
+INSERT INTO shopAPI.orderedProducts (orderID, productID, productName, price, quantity)
 VALUES
-('product1', 'order123', 'ProductA', 19.99, 2, 'Color: Red'),
-('product2', 'order123', 'ProductB', 29.99, 1, 'Size: Medium'),
-('product3', 'order456', 'ProductC', 39.99, 3, 'Special Edition');
+('order123', 'prod1', 'Laptop XYZ', 1299.99, 2),
+('order123', 'prod2', 'T-shirt Blue', 19.99, 1),
+('order456', 'prod3', 'Book: Bestseller', 29.99, 3),
+('order456', 'prod2', 'T-shirt Blue', 19.99, 1);
+
+INSERT INTO shopAPI.cart (cartID, userID, productID, quantity)
+VALUES
+('1', '1', 'prod2', 2),
+('2', '2', 'prod3', 1),
+('3', '1', 'prod1', 3);
+
+INSERT INTO shopAPI.reviews (reviewID, productID, userID, comment, rating, reviewTime)
+VALUES
+    ('review1', 'prod1', '1', 'Great product!', 5, '2024-01-09 12:30:00'),
+    ('review2', 'prod1', '1', 'Excellent quality.', 4, '2024-01-10 14:45:00'),
+    ('review3', 'prod2', '2', 'Not satisfied with the purchase.', 2, '2024-01-11 10:15:00'),
+    ('review4', 'prod3', '2', 'Amazing book, highly recommend!', 5, '2024-01-12 09:00:00');

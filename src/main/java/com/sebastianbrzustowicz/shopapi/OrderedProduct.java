@@ -11,15 +11,11 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Product {
-    private String productId;
+public class OrderedProduct {
+
+    private String orderID;
+    private String productID;
     private String productName;
     private BigDecimal price;
-    private String description;
-    private String category;
-    private int availableQuantity;
-    private String imagePath;
-
-    // Constructors, getters, setters are done by Lombok
-
+    private int quantity;
 }
