@@ -1,8 +1,8 @@
 package com.sebastianbrzustowicz.shopapi;
 
+import com.sebastianbrzustowicz.shopapi.controller.ShopController;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

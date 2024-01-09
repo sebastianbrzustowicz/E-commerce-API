@@ -1,4 +1,4 @@
-package com.sebastianbrzustowicz.shopapi;
+package com.sebastianbrzustowicz.shopapi.model;
 
 import lombok.Getter;
 import lombok.Setter;

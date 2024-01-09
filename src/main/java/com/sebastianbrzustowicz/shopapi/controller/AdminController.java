@@ -1,5 +1,8 @@
-package com.sebastianbrzustowicz.shopapi;
+package com.sebastianbrzustowicz.shopapi.controller;
 
+import com.sebastianbrzustowicz.shopapi.repository.AdminRepository;
+import com.sebastianbrzustowicz.shopapi.model.Product;
+import com.sebastianbrzustowicz.shopapi.model.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
