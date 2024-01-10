@@ -1,7 +1,9 @@
 ## E-commerce API
 
 E-commerce API is a Java-based, server-side application created to establish communication with client and database.   
-The application uses a MySQL database to store users and orders information.  
+Multiplatform e-commerce application, encompassing a wide range of functionalities to meet the diverse needs of online retail.    
+The application uses a MySQL database to store users and orders information.    
+Containerisation with Docker allows the API to run on different platforms.
 
 ## Deploy
 
@@ -139,7 +141,7 @@ The JDBC interface has been used to create a connection to the database.
 | Column Name        | Data Type                | Constraints                  |
 |--------------------|--------------------------|------------------------------|
 | userID             | VARCHAR(36)              | FOREIGN KEY (userId)| REFERENCES shopAPI.users(userID) |
-| orderID            | VARCHAR(36) PRIMARY KEY  |                              |
+| orderID            | VARCHAR(36)              | PRIMARY KEY                  |
 | orderType          | VARCHAR(50) NOT NULL     |                              |
 | additionalInfo     | VARCHAR(255)             |                              |
 | registrationTime   | DATETIME                 |                              |
@@ -158,7 +160,7 @@ The JDBC interface has been used to create a connection to the database.
 
 | Column Name   | Data Type                | Constraints                                  |
 |---------------|--------------------------|----------------------------------------------|
-| cartID        | VARCHAR(36) PRIMARY KEY  |                                              |
+| cartID        | VARCHAR(36)              | PRIMARY KEY                                  |
 | userID        | VARCHAR(36)              | FOREIGN KEY (userID) REFERENCES shopAPI.users(userID) |
 | productID     | VARCHAR(36)              | FOREIGN KEY (productID) REFERENCES shopAPI.products(productID) |
 | quantity      | INT                      |                                              |
@@ -167,7 +169,7 @@ The JDBC interface has been used to create a connection to the database.
 
 | Column Name   | Data Type                | Constraints                                  |
 |---------------|--------------------------|----------------------------------------------|
-| reviewID      | VARCHAR(36) PRIMARY KEY  |                                              |
+| reviewID      | VARCHAR(36)              | PRIMARY KEY                                  |
 | productID     | VARCHAR(36)              | FOREIGN KEY (productID) REFERENCES shopAPI.products(productID) |
 | userID        | VARCHAR(36)              | FOREIGN KEY (userID) REFERENCES shopAPI.users(userID) |
 | comment       | VARCHAR(500) NOT NULL    |                                              |
@@ -178,6 +180,7 @@ The JDBC interface has been used to create a connection to the database.
 
 Some simple JUnit tests have been implemented:
 ```java
+MySQLConnectionTest()
 testRegisterUser_SuccessfulRegistration()
 ```
 
