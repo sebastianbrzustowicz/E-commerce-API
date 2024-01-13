@@ -19,9 +19,6 @@ public class AdminController {
 
     @GetMapping("/test")
     public String getAll() {
-        String email = "email";
-        String password = "password";
-        //return ShopRepository.test(email, password);
         return "admin endpoint works";
     }
 
