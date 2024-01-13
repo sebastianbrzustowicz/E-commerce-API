@@ -1,9 +1,34 @@
-## E-commerce API
+## E-commerce API with AI assistant
 
 E-commerce API is a Java-based, server-side application created to establish communication with client and database.   
+The AI assistant also known as ChatGPT version 3.5 Turbo was used.     
+The version can be changed as required. The AI assistant function requires the correct API key provided by OpenAI.    
+It allows the user to obtain general information about the shop, contact and specific information about available products.     
 Multiplatform e-commerce application, encompassing a wide range of functionalities to meet the diverse needs of online retail.    
 The application uses a MySQL database to store users and orders information.    
 Containerisation with Docker allows the API to run on different platforms.
+
+## AI assistant example usage
+
+API allows to send such message for this specific endpoint:    
+| HTTP method | endpoint | description | request type | response type |
+| -------------- | -------------- | -------------- | -------------- | -------------- |
+| :yellow_circle: POST | /ai/askGPT | Ask the AI assistant a question | GPTRequest | String |
+
+where request looks like that:
+```json
+{
+    "requestType": "give advice",
+    "clientRequest": "Do you have any laptops here?"
+}
+```
+As the result we receive the following message from ChatGPT:
+```
+Yes, we do have laptops available in our online shop. One of our featured laptops is the "Laptop XYZ," priced at $1299.99. It's a high-performance laptop with advanced features. We currently have 10 units in stock. If you're interested, you can find more details and place an order on our website. If you have any other questions or need further assistance, feel free to ask.
+```
+As you can see, AI assistant have access to information about actual shop inventory.     
+ChatBot has been configured early on to respond according to a certain rules.    
+These rules can be changed by admin via specific endpoints.    
 
 ## Deploy
 
@@ -92,6 +117,7 @@ Rest endpoints for client only:
 | :yellow_circle: POST | /profile/update | Update user profile information | User | String |
 | :green_circle: GET | /products/{reviewID}/reviews | Get product reviews | - | List&lt;Review&gt; |
 | :yellow_circle: POST | /products/{reviewID}/reviews/add | Add a review for a product | Review | String |
+| :yellow_circle: POST | /ai/askGPT | Ask the AI assistant a question | GPTRequest | String |
 
 Rest endpoints for admin only:    
 
