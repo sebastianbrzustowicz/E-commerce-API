@@ -24,9 +24,9 @@ public class ShopRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public String test(String email, String password) {
-        String sql = "SELECT userId FROM users WHERE email = ? AND password = ?";
-        return jdbcTemplate.queryForObject(sql, String.class, email, password);
+    public String getDBname() {
+        String sql = "SELECT DATABASE();";
+        return jdbcTemplate.queryForObject(sql, String.class);
     }
 
     public List<Product> getAllProducts() {

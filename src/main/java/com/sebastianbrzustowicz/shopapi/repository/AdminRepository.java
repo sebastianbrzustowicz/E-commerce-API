@@ -19,6 +19,11 @@ public class AdminRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    public String getDBname() {
+        String sql = "SELECT DATABASE();";
+        return jdbcTemplate.queryForObject(sql, String.class);
+    }
+
     public String addProduct(Product product) {
         String sql = "INSERT IGNORE INTO shopAPI.products " +
                 "(productId, productName, price, description, category, availableQuantity, imagePath) " +

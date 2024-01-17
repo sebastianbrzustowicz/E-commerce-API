@@ -18,11 +18,11 @@ public class ShopController {
 
     @GetMapping("/test")
     public String getAll() {
-        String email = "email";
-        String password = "password";
-        //return ShopRepository.test(email, password);
-        return "api endpoint works";
+        return "shop test endpoint works";
     }
+
+    @GetMapping("/testdb")
+    public String getDBname() { return shopRepository.getDBname(); }
 
     @GetMapping("/products")
     public List<Product> retrieveProducts() {

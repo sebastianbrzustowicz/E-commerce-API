@@ -20,7 +20,7 @@ public class AIController {
 
     @GetMapping("/test")
     public String getAll() {
-        return "api endpoint works";
+        return "ai test endpoint works";
     }
 
     @GetMapping("/testdb")

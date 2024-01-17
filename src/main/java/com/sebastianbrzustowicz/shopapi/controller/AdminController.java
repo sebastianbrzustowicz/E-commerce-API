@@ -18,9 +18,10 @@ public class AdminController {
     }
 
     @GetMapping("/test")
-    public String getAll() {
-        return "admin endpoint works";
-    }
+    public String getAll() { return "admin test endpoint works"; }
+
+    @GetMapping("/testdb")
+    public String getDBname() { return adminRepository.getDBname(); }
 
     @PostMapping("/products/add")
     public String addProduct(@RequestBody Product product) {
